@@ -1,0 +1,19 @@
+# Editor directories and files
+.vscode/
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+*.ipynb
+.env
+
+# Scratch files
+test.py
+ya.txt
+
+# Non-web files
+GT/
+Referensi Design/
+claude_prompt.md
+iframe.txt
+send_tickets.py

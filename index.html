@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praktikum Pemrograman Fisika 2026/2027</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/LogoAKN.png">
+  <link rel="shortcut icon" href="assets/icons/LogoAKN.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       BACKGROUND DECORATIONS (handled by JS + CSS)
+  ============================================================ -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-arcs" aria-hidden="true">
+    <span class="arc-ring arc-ring-1"></span>
+    <span class="arc-ring arc-ring-2"></span>
+  </div>
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+    <span class="orb orb-4"></span>
+  </div>
+  <div class="bg-flash" aria-hidden="true"></div>
+  <canvas id="starCanvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+
+      <!-- LOGO -->
+      <a href="#hero" class="nav-logo">
+        <img
+          src="assets/icons/LogoAKN.png"
+          alt="Logo AsLabKom"
+          class="nav-logo-img"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <span class="nav-logo-fallback" aria-hidden="true">
+          <i class="fas fa-infinity"></i>
+        </span>
+        <span class="nav-logo-text">AsLabKom <strong>PF</strong></span>
+      </a>
+
+      <!-- Desktop nav links -->
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#asisten">Asisten</a></li>
+          <li><a href="#modul">Modul</a></li>
+          <li><a href="#referensi">Referensi</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#template">Template</a></li>
+        </ul>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <ul>
+        <li><a href="#asisten">Asisten</a></li>
+        <li><a href="#modul">Modul</a></li>
+        <li><a href="#referensi">Referensi</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#template">Template</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       HERO / SELAMAT DATANG
+  ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="binary-rain" id="binaryRain"></div>
+    <div class="container hero-layout">
+
+      <!-- Left: text content -->
+      <div class="hero-content reveal">
+
+        <!-- Arcade-font sub-label -->
+        <p class="hero-arcade">// PRAKTIKUM PEMROGRAMAN FISIKA</p>
+
+        <h1 class="hero-title">
+          Selamat Datang di<br />
+          <span class="gradient-text" id="typedText"></span>
+        </h1>
+
+        <p class="hero-desc">
+          Praktikum Pemrograman Fisika membekali mahasiswa merancang algoritma
+          dan menerjemahkannya ke dalam kode Python untuk menyelesaikan
+          permasalahan fisika sederhana.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="https://drive.google.com/drive/folders/1DdyK5RXLGRdZNIZH70ws-UxrqsUMrb7D?usp=drive_link" target="_blank">
+            <button class="btn btn-primary ripple">
+              <i class="fas fa-file-powerpoint"></i> PPT Responsi
+            </button>
+          </a>
+          <a href="https://drive.google.com/drive/u/6/folders/1mSzW9fKPvozSWDIp3zbFjqivB5sdtxnD" target="_blank">
+            <button class="btn btn-secondary ripple">
+              <i class="fas fa-book"></i> Kebutuhan Praktikum
+            </button>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong class="counter" data-target="12">0</strong>
+            <span>Asisten</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <strong class="counter" data-target="12">0</strong>
+            <span>Modul</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <strong class="counter" data-target="5">0</strong>
+            <span>Referensi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: glass card with logo -->
+      <div class="hero-visual reveal reveal-delay-2">
+        <div class="hero-card glass-card">
+
+          <div class="hero-card-logo">
+            <img
+                src="assets/icons/LogoAKN.png"
+                alt="Logo Praktikum Pemrograman Fisika"
+                class="hero-logo-img"
+            />
+          </div>
+
+          <h3 class="hero-card-title">Praktikum Pemrograman Fisika</h3>
+          <p class="hero-card-sub">Program Studi Fisika · FMIPA Unpad</p>
+
+          <div class="divider"></div>
+
+          <p class="hero-card-body">
+            Platform resmi informasi, timeline, template laporan, dan referensi
+            Praktikum Pemrograman Fisika Semester Ganjil 2026/2027.
+          </p>
+        </div>
+
+        <!-- Floating pills -->
+        <div class="float-pill pill-top">
+          <i class="fas fa-atom"></i> Physics Programming
+        </div>
+        <div class="float-pill pill-bottom">
+            <img src="assets/icons/Python.png" class="pill-icon" alt="Python Logo"> Python
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint" aria-hidden="true">
+      <span></span>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       ASISTEN LABORATORIUM
+  ============================================================ -->
+  <section class="asisten-praktikum" id="asisten">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <span class="section-label">Tim Kami</span>
+        <h2 class="section-title">Asisten <span class="gradient-text">Laboratorium</span> Komputer</h2>
+        <p class="section-desc">
+          Praktikum Pemrograman Fisika Semester Ganjil 2026/2027,
+          Program Studi Fisika, FMIPA Universitas Padjadjaran.
+        </p>
+      </div>
+
+      <div class="asisten-grid">
+
+        <a href="https://wa.me/6289503117385" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Aditya.png" alt="Foto Aditya"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>AD</span></div>
+              <span class="asisten-badge koordinator">Koordinator</span>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Aditya</p>
+              <p class="asisten-role">PIC Kelompok 1</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/6281214026005" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-1">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Farsya.png" alt="Foto Farsya"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>FA</span></div>
+              <span class="asisten-badge wakil">Wakil Koordinator</span>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Farsya</p>
+              <p class="asisten-role">PIC Kelompok 5</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/6281295710325" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-2">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Sandy.png" alt="Foto Sandy"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>SD</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Sandy</p>
+              <p class="asisten-role">PIC Kelompok 4</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/6285716175878" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-3">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Naila.png" alt="Foto Naila"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>NL</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Naila</p>
+              <p class="asisten-role">PIC Kelompok 8</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/6285722996051" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-1">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Rafif.png" alt="Foto Rafif"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>RF</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Rafif</p>
+              <p class="asisten-role">PIC Kelompok 10</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/6282127358865" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-2">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Idlan.png" alt="Foto Idlan"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>ID</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Idlan</p>
+              <p class="asisten-role">PIC Kelompok 3</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/62895605823038" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-3">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Fahri.png" alt="Foto Fahri"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>FH</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Fahri</p>
+              <p class="asisten-role">PIC Kelompok 7</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/6285722258030" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-1">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Dede.png" alt="Foto Dede"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>DD</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Dede</p>
+              <p class="asisten-role">PIC Kelompok 2</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="#asisten" class="asisten-link is-pending" title="Nomor WA menyusul">
+          <article class="asisten-card glass-card reveal reveal-delay-2">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Zahy.png" alt="Foto Zahy"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>ZH</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Zahy</p>
+              <p class="asisten-role">PIC Kelompok 12</p>
+              <span class="asisten-pending-note">WA menyusul</span>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/628987837866" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-3">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Bunga.png" alt="Foto Bunga"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>BG</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Bunga</p>
+              <p class="asisten-role">PIC Kelompok 11</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/6283142885327" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-1">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Radhitya.png" alt="Foto Radhitya"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>RD</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Radhitya</p>
+              <p class="asisten-role">PIC Kelompok 6</p>
+            </div>
+          </article>
+        </a>
+
+        <a href="https://wa.me/628117077795" target="_blank" class="asisten-link">
+          <article class="asisten-card glass-card reveal reveal-delay-2">
+            <div class="asisten-photo-wrap">
+              <img src="assets/images/Yonkippur.png" alt="Foto Yonkippur"
+                  class="asisten-photo"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+              <div class="asisten-photo-fallback"><span>YK</span></div>
+            </div>
+            <div class="asisten-info">
+              <p class="asisten-name">Yonkippur</p>
+              <p class="asisten-role">PIC Kelompok 9</p>
+            </div>
+          </article>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       OVERVIEW MODUL PRAKTIKUM
+  ============================================================ -->
+  <section class="modul-praktikum" id="modul">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <span class="section-label">Overview Modul</span>
+        <h2 class="section-title">Modul <span class="gradient-text">Praktikum</span> Pemrograman Fisika</h2>
+        <p class="section-desc">
+          Dua belas modul yang dipelajari sepanjang semester, dari pengenalan
+          Python hingga proyek akhir berbasis Project Based Learning.
+        </p>
+      </div>
+
+      <div class="modul-grid">
+
+        <div class="modul-pair reveal">
+          <div class="modul-piece modul-piece--a">
+            <div class="modul-icon-tile"><i class="fab fa-python"></i></div>
+            <div class="modul-bar">
+              <span class="modul-tag">M1</span>
+              <p class="modul-title">Pengenalan Python, Jupyter, dan Markdown</p>
+              <p class="modul-hint">Mengenal environment Python, Jupyter Notebook, dan cara menulis dokumentasi dengan Markdown.</p>
+            </div>
+          </div>
+          <div class="modul-piece modul-piece--b">
+            <div class="modul-bar modul-bar--flip">
+              <p class="modul-title">Variabel, Tipe Data, dan Dasar I/O</p>
+              <span class="modul-tag">M2</span>
+              <p class="modul-hint">Memahami variabel, tipe data dasar, serta perintah input dan output di Python.</p>
+            </div>
+            <div class="modul-icon-tile"><i class="fas fa-box-archive"></i></div>
+          </div>
+        </div>
+
+        <div class="modul-pair reveal reveal-delay-1">
+          <div class="modul-piece modul-piece--a">
+            <div class="modul-icon-tile"><i class="fas fa-calculator"></i></div>
+            <div class="modul-bar">
+              <span class="modul-tag">M3</span>
+              <p class="modul-title">Operasi Matematika &amp; Formatting Angka</p>
+              <p class="modul-hint">Melakukan operasi aritmatika dan memformat tampilan angka pada output program.</p>
+            </div>
+          </div>
+          <div class="modul-piece modul-piece--b">
+            <div class="modul-bar modul-bar--flip">
+              <p class="modul-title">Perancangan Algoritma &amp; Flowchart</p>
+              <span class="modul-tag">M4</span>
+              <p class="modul-hint">Merancang alur logika program dalam bentuk algoritma dan flowchart.</p>
+            </div>
+            <div class="modul-icon-tile"><i class="fas fa-diagram-project"></i></div>
+          </div>
+        </div>
+
+        <div class="modul-pair reveal reveal-delay-2">
+          <div class="modul-piece modul-piece--a">
+            <div class="modul-icon-tile"><i class="fas fa-code-branch"></i></div>
+            <div class="modul-bar">
+              <span class="modul-tag">M5</span>
+              <p class="modul-title">Struktur Kendali Percabangan</p>
+              <p class="modul-hint">Menggunakan if, elif, dan else untuk mengambil keputusan dalam program.</p>
+            </div>
+          </div>
+          <div class="modul-piece modul-piece--b">
+            <div class="modul-bar modul-bar--flip">
+              <p class="modul-title">Struktur Pengulangan (Looping)</p>
+              <span class="modul-tag">M6</span>
+              <p class="modul-hint">Menerapkan perulangan for dan while untuk proses yang berulang.</p>
+            </div>
+            <div class="modul-icon-tile"><i class="fas fa-rotate"></i></div>
+          </div>
+        </div>
+
+        <div class="modul-pair reveal reveal-delay-3">
+          <div class="modul-piece modul-piece--a">
+            <div class="modul-icon-tile"><i class="fas fa-puzzle-piece"></i></div>
+            <div class="modul-bar">
+              <span class="modul-tag">M7</span>
+              <p class="modul-title">Fungsi &amp; Modularisasi Kode</p>
+              <p class="modul-hint">Membuat fungsi untuk menyusun kode yang modular dan mudah dipakai ulang.</p>
+            </div>
+          </div>
+          <div class="modul-piece modul-piece--b">
+            <div class="modul-bar modul-bar--flip">
+              <p class="modul-title">Struktur Data List, Array, dan Matriks</p>
+              <span class="modul-tag">M8</span>
+              <p class="modul-hint">Mengelola kumpulan data dengan list, array, dan matriks.</p>
+            </div>
+            <div class="modul-icon-tile"><i class="fas fa-table-cells"></i></div>
+          </div>
+        </div>
+
+        <div class="modul-pair reveal">
+          <div class="modul-piece modul-piece--a">
+            <div class="modul-icon-tile"><i class="fas fa-border-all"></i></div>
+            <div class="modul-bar">
+              <span class="modul-tag">M9</span>
+              <p class="modul-title">Pengolahan Data Array &amp; Operasi Matriks</p>
+              <p class="modul-hint">Melakukan operasi matriks dan pengolahan data array menggunakan NumPy.</p>
+            </div>
+          </div>
+          <div class="modul-piece modul-piece--b">
+            <div class="modul-bar modul-bar--flip">
+              <p class="modul-title">Membaca dan Menulis File (File I/O)</p>
+              <span class="modul-tag">M10</span>
+              <p class="modul-hint">Membaca dan menulis data dari/ke file eksternal seperti .txt dan .csv.</p>
+            </div>
+            <div class="modul-icon-tile"><i class="fas fa-folder-open"></i></div>
+          </div>
+        </div>
+
+        <div class="modul-pair reveal reveal-delay-1">
+          <div class="modul-piece modul-piece--a">
+            <div class="modul-icon-tile"><i class="fas fa-chart-line"></i></div>
+            <div class="modul-bar">
+              <span class="modul-tag">M11</span>
+              <p class="modul-title">Visualisasi &amp; Plot Grafik Data</p>
+              <p class="modul-hint">Memvisualisasikan data fisika dalam bentuk grafik menggunakan Matplotlib.</p>
+            </div>
+          </div>
+          <div class="modul-piece modul-piece--b">
+            <div class="modul-bar modul-bar--flip">
+              <p class="modul-title">Project Based Learning (PBL)</p>
+              <span class="modul-tag">M12</span>
+              <p class="modul-hint">Mengerjakan proyek akhir yang mengintegrasikan seluruh materi yang telah dipelajari.</p>
+            </div>
+            <div class="modul-icon-tile"><i class="fas fa-people-group"></i></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BUKU REFERENSI
+  ============================================================ -->
+  <section class="buku-referensi" id="referensi">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <span class="section-label">Referensi</span>
+        <h2 class="section-title">Software <span class="gradient-text">&amp; Referensi</span></h2>
+        <p class="section-desc">
+          Buku rujukan utama untuk mendukung praktikum Pemrograman Fisika.
+        </p>
+      </div>
+
+      <div class="shelf-section reveal">
+        <h3 class="shelf-label"><i class="fab fa-python"></i> Computational Physics</h3>
+        <div class="bookshelf">
+          <div class="shelf-row">
+
+            <div class="shelf-book" data-color="teal" data-link="https://www.google.com/search?tbm=bks&amp;q=Computational+Physics+Problem+Solving+with+Python+Landau+Paez+Bordeianu">
+              <div class="book-spine">
+                <span class="spine-title">Computational Physics: Problem Solving with Python</span>
+                <span class="spine-author">Landau, Páez &amp; Bordeianu</span>
+              </div>
+              <div class="book-popup glass-card">
+                <div class="popup-cover-wrap">
+                  <img src="assets/images/computational-physics-landau.jpg" alt="Sampul Computational Physics: Problem Solving with Python" class="popup-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+                  <div class="popup-cover-fallback"><i class="fas fa-book-open"></i><span>Tambahkan<br>sampul buku</span></div>
+                </div>
+                <div class="popup-info">
+                  <p class="popup-title">Computational Physics: Problem Solving with Python</p>
+                  <p class="popup-author">Rubin H. Landau, Manuel J. Páez &amp; Cristian C. Bordeianu</p>
+                  <span class="popup-pub">Wiley-VCH</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="shelf-book" data-color="blue" data-link="https://drive.google.com/file/d/1b2dOCR0_WfrF5m9JB8Hrd_25S4orAQOe/view?usp=sharing">
+              <div class="book-spine">
+                <span class="spine-title">An Introduction to Computational Physics</span>
+                <span class="spine-author">Tao Pang</span>
+              </div>
+              <div class="book-popup glass-card">
+                <div class="popup-cover-wrap">
+                  <img src="assets/images/taopang.jpg" alt="Sampul An Introduction to Computational Physics" class="popup-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+                  <div class="popup-cover-fallback"><i class="fas fa-book-open"></i><span>Tambahkan<br>sampul buku</span></div>
+                </div>
+                <div class="popup-info">
+                  <p class="popup-title">An Introduction to Computational Physics</p>
+                  <p class="popup-author">Tao Pang</p>
+                  <span class="popup-pub">Cambridge University Press</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="shelf-book" data-color="green" data-link="https://www.google.com/search?tbm=bks&amp;q=Computational+Methods+for+Physics+Joel+Franklin">
+              <div class="book-spine">
+                <span class="spine-title">Computational Methods for Physics</span>
+                <span class="spine-author">Joel Franklin</span>
+              </div>
+              <div class="book-popup glass-card">
+                <div class="popup-cover-wrap">
+                  <img src="assets/images/computational-methods-franklin.jpg" alt="Sampul Computational Methods for Physics" class="popup-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+                  <div class="popup-cover-fallback"><i class="fas fa-book-open"></i><span>Tambahkan<br>sampul buku</span></div>
+                </div>
+                <div class="popup-info">
+                  <p class="popup-title">Computational Methods for Physics</p>
+                  <p class="popup-author">Joel Franklin</p>
+                  <span class="popup-pub">Cambridge University Press</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="shelf-book" data-color="orange" data-link="https://drive.google.com/file/d/1ZY-tIL0Wk9kSKBIQY1qgcSJmOEzNxCyH/view?usp=drive_link">
+              <div class="book-spine">
+                <span class="spine-title">Introductory Computational Physics</span>
+                <span class="spine-author">Klein &amp; Godunov</span>
+              </div>
+              <div class="book-popup glass-card">
+                <div class="popup-cover-wrap">
+                  <img src="assets/images/intro.jpg" alt="Sampul Introductory Computational Physics" class="popup-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+                  <div class="popup-cover-fallback"><i class="fas fa-book-open"></i><span>Tambahkan<br>sampul buku</span></div>
+                </div>
+                <div class="popup-info">
+                  <p class="popup-title">Introductory Computational Physics</p>
+                  <p class="popup-author">Andi Klein &amp; Alexander Godunov</p>
+                  <span class="popup-pub">Cambridge University Press</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="shelf-book" data-color="indigo" data-link="https://www.google.com/search?tbm=bks&amp;q=Numerical+Methods+in+Physics+with+Python+Alex+Gezerlis">
+              <div class="book-spine">
+                <span class="spine-title">Numerical Methods in Physics with Python</span>
+                <span class="spine-author">Alex Gezerlis</span>
+              </div>
+              <div class="book-popup glass-card">
+                <div class="popup-cover-wrap">
+                  <img src="assets/images/numerical-methods-gezerlis.jpg" alt="Sampul Numerical Methods in Physics with Python" class="popup-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+                  <div class="popup-cover-fallback"><i class="fas fa-book-open"></i><span>Tambahkan<br>sampul buku</span></div>
+                </div>
+                <div class="popup-info">
+                  <p class="popup-title">Numerical Methods in Physics with Python</p>
+                  <p class="popup-author">Alex Gezerlis</p>
+                  <span class="popup-pub">Cambridge University Press</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="shelf-plank"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TIMELINE PRAKTIKUM
+  ============================================================ -->
+  <section class="timeline" id="timeline">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <span class="section-label">Jadwal PF · 26/27</span>
+        <h2 class="section-title">Timeline <span class="gradient-text">Praktikum</span></h2>
+        <p class="section-desc">
+          Deadline setiap pending agar kamu bisa mempersiapkan diri.
+          Perhatikan warna penanda di kalender.
+        </p>
+      </div>
+
+      <!-- Calendar -->
+      <div class="gcal-wrap glass-card reveal">
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=prak.pkf.fisikaunpad%40gmail.com&ctz=UTC"
+          class="gcal-frame"
+          frameborder="0"
+          scrolling="no"
+          title="Google Calendar Praktikum Pemrograman Fisika"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TEMPLATE LAPORAN
+  ============================================================ -->
+  <section class="template" id="template">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-label">Template Laporan PF · 26/27</span>
+        <h2 class="section-title">Template <span class="gradient-text">Laporan</span> Praktikum</h2>
+        <p class="section-desc">
+          Laporan praktikum dikerjakan langsung di dalam notebook. Download
+          template Jupyter Notebook (.ipynb) berikut dan gunakan untuk laporan kamu.
+        </p>
+      </div>
+
+      <div class="template-grid">
+        <!-- Template Jupyter Notebook -->
+        <article class="template-card glass-card reveal">
+          <div class="template-preview-wrap">
+            <div class="template-preview-fallback" style="display:flex;">
+              <i class="fas fa-file-code"></i>
+              <span>.ipynb</span>
+            </div>
+          </div>
+          <div class="template-info">
+            <span class="template-badge badge-teal">Jupyter</span>
+            <h3 class="template-name">Template Jupyter Notebook</h3>
+            <p class="template-desc">
+              Template resmi format .ipynb — sudah memuat struktur Cover,
+              Tujuan, Tugas Percobaan, Tugas Akhir, dan Kesimpulan.
+            </p>
+            <a href="assets/template/Template-Laporan-Praktikum-PF.ipynb"
+               download
+               class="btn btn-primary ripple">
+              <i class="fas fa-download"></i> Download Template
+            </a>
+          </div>
+        </article>
+
+      </div><!-- /template-grid -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+       INSTAGRAM CTA
+  ============================================================ -->
+  <section class="whatsapp" id="instagram">
+    <div class="container">
+      <div class="wa-card glass-card reveal">
+        <i class="fab fa-instagram wa-icon"></i>
+        <h2 class="wa-title">Follow Our Instagram<br />to get any information</h2>
+        <p class="wa-desc">
+          Ikuti akun Instagram kami untuk mendapatkan
+          informasi terbaru, jadwal, dan pengumuman seputar praktikum.
+        </p>
+        <a href="https://instagram.com/" class="btn btn-wa ripple" target="_blank" rel="noopener">
+          <i class="fab fa-instagram"></i> Follow Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Logo & tagline -->
+      <div class="footer-brand">
+
+        <div class="footer-logo">
+          <img
+            src="assets/icons/LogoAKN.png"
+            alt="Logo AsLabKom"
+            class="footer-logo-img"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div class="footer-logo-fallback" aria-hidden="true">
+            <i class="fas fa-infinity"></i>
+          </div>
+          <span class="footer-logo-text">AsLabKom <strong>PF</strong></span>
+        </div>
+
+        <p class="footer-tagline">
+          Asisten Laboratorium Komputer<br />
+          Praktikum Pemrograman Fisika · FMIPA Unpad
+        </p>
+      </div>
+
+      <!-- Quick links -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul>
+          <li><a href="#asisten">Asisten</a></li>
+          <li><a href="#modul">Modul</a></li>
+          <li><a href="#referensi">Referensi</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#template">Template</a></li>
+        </ul>
+      </nav>
+
+      <!-- Collab badges -->
+      <div class="footer-collab">
+        <p class="collab-title">In Collaboration With</p>
+        <div class="collab-logos">
+          <img src="assets/icons/Logo-Fisika.png" alt="Logo Fisika Unpad">
+          <img src="assets/icons/LogoHIFI-2.png" alt="Logo HIFI">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>Copyrights &copy; 2026/2027 AsLabKom PF &mdash; All rights reserved</p>
+    </div>
+  </footer>
+
+
+  <!-- Script -->
+  <script src="js/script.js"></script>
+
+</body>
+</html>
